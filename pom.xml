@@ -9,8 +9,10 @@
   <url>http://maven.apache.org</url>
 
   <modules>
-    <module>hadoop-usage</module>
     <module>common-main</module>
+    <module>hadoop-usage</module>
+    <module>netty-usage</module>
+    <module>zookeeper-usage</module>
   </modules>
 
   <dependencies>
