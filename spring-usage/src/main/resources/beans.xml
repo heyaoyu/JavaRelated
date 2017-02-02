@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:context="http://www.springframework.org/schema/context"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
-     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
   <bean id="singleBean" class="org.heyaoyu.tutorials.bean.SingleBean">
     <constructor-arg value="a-single-bean"/>
   </bean>
+
+  <bean id="getAspect" class="org.heyaoyu.tutorials.aspect.GetAspect"/>
+
+  <aop:config>
+    <aop:aspect ref="getAspect">
+      <aop:pointcut id="getMethod" expression="execution(* *.get*(..))"/>
+      <aop:before pointcut-ref="getMethod" method="beforeGet"/>
+      <aop:after-returning pointcut-ref="getMethod" method="afterGet"/>
+    </aop:aspect>
+  </aop:config>
+
+  <bean id="beanInitByFactoryMethod" class="org.heyaoyu.tutorials.bean.BeanInitByFactoryMethod"
+    factory-method="getInstance"/>
+
+  <context:component-scan base-package="org.heyaoyu.tutorials"/>
+
+  <aop:aspectj-autoproxy/>
 </beans>
