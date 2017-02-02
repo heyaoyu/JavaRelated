@@ -30,7 +30,7 @@ public class AnotherGetAspect {
   }
 
   @Around("targetMethod()")
-  public Object roundGet(ProceedingJoinPoint joinPoint) throws Throwable {
+  public Object aroundGet(ProceedingJoinPoint joinPoint) throws Throwable {
     System.out.println("args:" + joinPoint.getArgs().toString());
     System.out.println("1");
     Object o = joinPoint.proceed();
