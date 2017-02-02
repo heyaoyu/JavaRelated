@@ -13,6 +13,7 @@
     <module>hadoop-usage</module>
     <module>netty-usage</module>
     <module>zookeeper-usage</module>
+    <module>spring-usage</module>
   </modules>
 
   <dependencies>
