@@ -51,8 +51,8 @@ public class ElasicSearchMain {
     // search entity
     SearchRequestBuilder searchReq = client.prepareSearch("test").setTypes("entity");
     SearchResponse searchRes = searchReq
-        .setQuery(QueryBuilders.matchQuery("id", "id1"))
-        .setQuery(QueryBuilders.rangeQuery("ts").to(1488445147528l-1))
+//        .setQuery(QueryBuilders.matchQuery("id", "id1"))
+        .setQuery(QueryBuilders.rangeQuery("ts").to(1488445147528l - 1))
         .addSort("ts", SortOrder.DESC)
         .setFrom(0)
         .setSize(2).execute().actionGet();
