@@ -17,6 +17,7 @@
     <module>zookeeper-usage</module>
     <module>spring-usage</module>
     <module>sub-module-profile-experiment</module>
+    <module>elasticsearch-usage</module>
   </modules>
 
   <dependencies>
