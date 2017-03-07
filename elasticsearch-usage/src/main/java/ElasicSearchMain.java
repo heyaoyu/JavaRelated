@@ -52,13 +52,13 @@ public class ElasicSearchMain {
     SearchRequestBuilder searchReq = client.prepareSearch("test").setTypes("entity");
     SearchResponse searchRes = searchReq
 //        .setQuery(QueryBuilders.matchQuery("id", "id1"))
-        .setQuery(QueryBuilders.rangeQuery("ts").to(1488445147528l - 1))
+        .setQuery(QueryBuilders.rangeQuery("ts").to(System.currentTimeMillis()))
         .addSort("ts", SortOrder.DESC)
         .setFrom(0)
         .setSize(2).execute().actionGet();
     SearchHits hits = searchRes.getHits();
     for (SearchHit hit : hits.getHits()) {
-      System.out.println(hit.getSource().get("ts"));
+      System.out.println(hit.getSourceAsString());
     }
     // delete entity
 //    DeleteRequestBuilder deleteReq = client.prepareDelete("test", "entity", id);
