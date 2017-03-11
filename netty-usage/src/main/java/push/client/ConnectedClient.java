@@ -17,20 +17,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by heyaoyu on 2017/3/11.
+ * Created by heyaoyu on 2017/2/25.
  */
-public class PushClient {
+public class ConnectedClient {
 
   public static void main(final String[] args) {
     EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
     Bootstrap bootstrap = new Bootstrap();
     try {
       ChannelFuture future = bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class)
-          .remoteAddress(new InetSocketAddress("127.0.0.1", 8888))
+          .remoteAddress(new InetSocketAddress("127.0.0.1", 7777))
           .handler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel channel) throws Exception {
-              channel.pipeline().addLast(new PushClientHandler());
+              channel.pipeline().addLast(new ConnectClientHandler());
             }
           }).connect().sync();
       future.channel().closeFuture().sync();
@@ -41,21 +41,32 @@ public class PushClient {
     }
   }
 
-  public static class PushClientHandler extends ChannelInboundHandlerAdapter {
+  public static class ConnectClientHandler extends ChannelInboundHandlerAdapter {
 
-    private final static Logger logger = LoggerFactory.getLogger(PushClientHandler.class);
+    private final static Logger logger = LoggerFactory.getLogger(ConnectClientHandler.class);
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
       ctx.writeAndFlush(Unpooled.copiedBuffer("deviceId:x", CharsetUtil.UTF_8));
 //      ctx.writeAndFlush("clientId");
-      ctx.close();
+    }
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+      byte[] bytes = new byte[((ByteBuf) msg).readableBytes()];
+      ((ByteBuf) msg).readBytes(bytes);
+      String response = new String(bytes);
+      System.out.println("From server:" + response);
+      if (response.equals("close")) {
+        ctx.close();
+      }
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-      logger.error("PushClientHandlerError", cause);
+      logger.error("ConnectClientHandlerError", cause);
       cause.printStackTrace();
     }
   }
+
 }
