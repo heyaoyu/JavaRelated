@@ -18,6 +18,7 @@
     <module>spring-usage</module>
     <module>sub-module-profile-experiment</module>
     <module>elasticsearch-usage</module>
+    <module>kafka-usage</module>
   </modules>
 
   <dependencies>
