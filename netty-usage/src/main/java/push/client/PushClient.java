@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by heyaoyu on 2017/3/11.
  */
+
+// PushClient -> PushServer -> ConnectedClient
 public class PushClient {
 
   public static void main(final String[] args) {
