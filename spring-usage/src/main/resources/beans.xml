@@ -6,7 +6,9 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
      http://www.springframework.org/schema/aop
-     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context.xsd">
 
   <bean id="singleBean" class="org.heyaoyu.tutorials.bean.SingleBean">
     <constructor-arg value="a-single-bean"/>
@@ -25,7 +27,8 @@
   <bean id="beanInitByFactoryMethod" class="org.heyaoyu.tutorials.bean.BeanInitByFactoryMethod"
     factory-method="getInstance"/>
 
-  <context:component-scan base-package="org.heyaoyu.tutorials"/>
+  <context:component-scan base-package="org.heyaoyu.tutorials.aspect"/>
+  <context:component-scan base-package="org.heyaoyu.tutorials.bean"/>
 
   <aop:aspectj-autoproxy/>
 </beans>

@@ -41,6 +41,7 @@ public class ElasicSearchMain {
     // index entity
 //    Entity entity = new Entity("id1", System.currentTimeMillis());
 //    IndexRequestBuilder indexReq = client.prepareIndex("test", "entity");
+//    IndexRequestBuilder indexReq = client.prepareIndex("test", "entity", customUnique_id); // customUnique_id for update exact entity
 //    XContentBuilder doc = jsonBuilder().startObject()
 //        .field("id", entity.id)
 //        .field("ts", entity.ts)

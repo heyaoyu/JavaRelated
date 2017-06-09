@@ -10,6 +10,9 @@ import kafka.message.MessageAndMetadata;
 
 /**
  * Created by heyaoyu on 2017/3/30.
+ * topicCountMap - a map of (topic, #streams) pair
+ *        Returns: a map of (topic, list of KafkaStream) pairs. The number of items in the list is #streams.
+ * Each stream supports an iterator over message/metadata pairs.
  */
 public class KafkaHighLevel08Consumer {
 

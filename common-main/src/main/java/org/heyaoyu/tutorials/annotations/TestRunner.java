@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 
 /**
  * Created by heyaoyu on 2017/1/7. 反射method.invoke()方法第一个参数是null即为static方法
+ * javaagent + annotation???
  */
 public class TestRunner {
 

@@ -161,31 +161,31 @@ public class PushServer {
 
   }
 
-  public static class PushConnectServerHandler extends ChannelInboundHandlerAdapter {
-
-    private final static Logger logger = LoggerFactory.getLogger(PushConnectServerHandler.class);
-
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) {
-    }
-
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-      byte[] bytes = new byte[((ByteBuf) msg).readableBytes()];
-      ((ByteBuf) msg).readBytes(bytes);
-      String clientStr = new String(bytes);
-      Attribute<String> attribute = ctx.channel().attr(clientid);
-      attribute.set(clientStr);
-      CHANNEL_STORE.put(attribute.get(), ctx);
-      if (attribute.get().equals("push")) {
-        ctx.fireChannelRead(msg);
-      }
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-      logger.error("PushAuthServerHandlerError", cause);
-      cause.printStackTrace();
-    }
-  }
+//  public static class PushConnectServerHandler extends ChannelInboundHandlerAdapter {
+//
+//    private final static Logger logger = LoggerFactory.getLogger(PushConnectServerHandler.class);
+//
+//    @Override
+//    public void channelActive(ChannelHandlerContext ctx) {
+//    }
+//
+//    @Override
+//    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+//      byte[] bytes = new byte[((ByteBuf) msg).readableBytes()];
+//      ((ByteBuf) msg).readBytes(bytes);
+//      String clientStr = new String(bytes);
+//      Attribute<String> attribute = ctx.channel().attr(clientid);
+//      attribute.set(clientStr);
+//      CHANNEL_STORE.put(attribute.get(), ctx);
+//      if (attribute.get().equals("push")) {
+//        ctx.fireChannelRead(msg);
+//      }
+//    }
+//
+//    @Override
+//    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+//      logger.error("PushAuthServerHandlerError", cause);
+//      cause.printStackTrace();
+//    }
+//  }
 }
