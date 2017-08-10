@@ -9,7 +9,10 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>org.heyaoyu.tutorials</groupId>
   <artifactId>sub-module-profile-experiment</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <build>
     <resources>
