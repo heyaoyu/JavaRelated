@@ -21,6 +21,8 @@ public class CustomDS {
 
   private final static ObjectMapper mapper = new ObjectMapper();
 
+  // docker start cb_server
+  // to run this example
   public static void main(String[] args) throws IOException {
     String bucket = "default";
     URI uri = URI.create("http://127.0.0.1:8091");
