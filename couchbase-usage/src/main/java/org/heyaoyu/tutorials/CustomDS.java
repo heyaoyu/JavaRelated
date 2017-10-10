@@ -2,7 +2,6 @@ package org.heyaoyu.tutorials;
 
 import com.couchbase.client.CouchbaseClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +22,8 @@ public class CustomDS {
 
   // docker start cb_server
   // to run this example
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws Exception {
+    // mapper usage
     String bucket = "default";
     URI uri = URI.create("http://127.0.0.1:8091");
     List<URI> uriList = new ArrayList<URI>() {{
@@ -37,6 +37,13 @@ public class CustomDS {
     for (Map.Entry<?, ?> entry : restore.entrySet()) {
       System.out.println(entry.getKey() + ", " + entry.getValue());
     }
+    // multiple set expire-->effective
+    client.set("testKey2", 5, "exist");
+    System.out.println(client.get("testKey2"));
+    Thread.sleep(2000);
+    client.set("testKey2", 5, "exist2");
+    Thread.sleep(4000);
+    System.out.println(client.get("testKey2"));
     client.shutdown();
   }
 
