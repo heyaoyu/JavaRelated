@@ -2,6 +2,7 @@ package org.heyaoyu.tutorials.thread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Created by heyaoyu on 2017/5/28.
@@ -13,6 +14,8 @@ public class ThreadWithException {
     try {
 //      es.execute(new RunnableWithRuntimeException());
       es.submit(new RunnableWithRuntimeException()); // swallow
+//      Future<?> future = es.submit(new RunnableWithRuntimeException()); // swallow
+//      future.get();
     } catch (Exception ex) {
       System.out.println("custom ex:" + ex);
     }
