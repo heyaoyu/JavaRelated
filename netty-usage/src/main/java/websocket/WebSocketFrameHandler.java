@@ -21,7 +21,15 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
 
     if (frame instanceof TextWebSocketFrame) {
       // Send the uppercase string back.
+//      get username thru attributekey
+//      Attribute<String> attr = ctx.channel().attr(AuthHandler.userKey);
+//      String user = attr.get();
       String request = ((TextWebSocketFrame) frame).text();
+      if (request.startsWith("push")) {
+        String[] contents = request.split("_");
+        ChannelHandlerContext context = AuthHandler.store.getOrDefault(contents[1], null);
+        context.writeAndFlush(new TextWebSocketFrame(contents[2].toUpperCase(Locale.US)));
+      }
       logger.info("{} received {}", ctx.channel(), request);
       ctx.channel().writeAndFlush(new TextWebSocketFrame(request.toUpperCase(Locale.US)));
     } else {

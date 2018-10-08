@@ -11,7 +11,7 @@
     window.WebSocket = window.MozWebSocket;
   }
   if (window.WebSocket) {
-    socket = new WebSocket("ws://localhost:8080/websocket?user=test");
+    socket = new WebSocket("ws://localhost:8080/websocket?user=test2");
     socket.onmessage = function (event) {
       var ta = document.getElementById('responseText');
       ta.value = ta.value + "\n" + event.data;
@@ -55,7 +55,7 @@
   <br/>
   <label>
     <textarea id="message" name="message"
-              style="width:500px;height:50px;">push_test2_a</textarea>
+              style="width:500px;height:50px;">push_test_b</textarea>
   </label>
   <br><br>
   <input type="button" value="发送" onclick="send(this.form.message.value)"/>
