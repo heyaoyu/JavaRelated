@@ -27,8 +27,10 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
       String request = ((TextWebSocketFrame) frame).text();
       if (request.startsWith("push")) {
         String[] contents = request.split("_");
-        ChannelHandlerContext context = AuthHandler.store.getOrDefault(contents[1], null);
-        context.writeAndFlush(new TextWebSocketFrame(contents[2].toUpperCase(Locale.US)));
+        ChannelHandlerContext context = AuthHandler.store.get(contents[1]);
+        if (context != null) {
+          context.writeAndFlush(new TextWebSocketFrame(contents[2].toUpperCase(Locale.US)));
+        }
       }
       logger.info("{} received {}", ctx.channel(), request);
       ctx.channel().writeAndFlush(new TextWebSocketFrame(request.toUpperCase(Locale.US)));

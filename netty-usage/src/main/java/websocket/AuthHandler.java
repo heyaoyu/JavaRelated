@@ -16,7 +16,7 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
 
   public final static AttributeKey<String> userKey = AttributeKey.valueOf("user");
 
-  public final static ConcurrentHashMap<String, ChannelHandlerContext> store = new ConcurrentHashMap<>();
+  public final static ConcurrentHashMap<String, ChannelHandlerContext> store = new ConcurrentHashMap<String, ChannelHandlerContext>();
 
   @Override
   public void channelRead(final ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -40,8 +40,19 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
   }
 
   @Override
+  public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    Attribute<String> attr = ctx.channel().attr(userKey);
+    String user = attr.get();
+    store.remove(user);
+    super.channelInactive(ctx);
+  }
+
+  @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
       throws Exception {
+    Attribute<String> attr = ctx.channel().attr(userKey);
+    String user = attr.get();
+    store.remove(user, null);
     cause.printStackTrace();
   }
 }
